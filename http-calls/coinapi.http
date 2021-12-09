@@ -1,0 +1,12 @@
+@baseUrl = https://rest.coinapi.io/v1
+@apiKey = {{$dotenv COINAPI_KEY}}
+###
+GET {{baseUrl}}/assets
+X-CoinAPI-Key: {{apiKey}}
+
+### Get assets icons
+GET {{baseUrl}}/assets/icons/32
+X-CoinAPI-Key: {{apiKey}}
+###
+GET {{baseUrl}}/symbols?filter_asset_id_base={BNB}
+X-CoinAPI-Key: {{apiKey}}

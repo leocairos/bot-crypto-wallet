@@ -1,0 +1,5 @@
+@baseUrl = https://pro-api.coinmarketcap.com/v1
+@apiKey = {{$dotenv COINMARKETCAP_KEY}}
+###
+GET {{baseUrl}}/cryptocurrency/listings/latest
+X-CMC_PRO_API_KEY: {{apiKey}}

@@ -1,0 +1,19 @@
+@baseUrl = https://api.binance.com/api/v3
+@apiKey = {{$dotenv BINANCE_KEY}}
+###
+GET {{baseUrl}}/ticker/bookTicker
+###
+GET {{baseUrl}}/klines?symbol=MANAUSDT&interval=1m
+###
+GET {{baseUrl}}/ticker/bookTicker?symbol=BTCBUSD
+###
+GET {{baseUrl}}/exchangeInfo
+###
+GET {{baseUrl}}/exchangeInfo?symbol=BNBBTC
+###
+GET {{baseUrl}}/depth?symbol=BNBBTC&limit=5000
+###
+GET {{baseUrl}}/trades?symbol=BTCBUSD&limit=100
+###
+GET https://api.binance.com/sapi/v1/managed-subaccount/asset
+X-MBX-APIKEY: {{apiKey}}
