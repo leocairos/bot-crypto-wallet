@@ -32,7 +32,7 @@ const currency = "BUSD";
 const coinPairs = [
     {
         buyDate: "2021-11-26 07:18:45", 
-        symbol:"BNBBTC" , 
+        symbol:"BNBBTC", 
         baseAsset:"BNB", 
         quoteAsset:"BTC", 
         amountBase: 2, //BNB
