@@ -2,6 +2,8 @@ require('dotenv-safe').config();
 
 const axios = require('axios');
 const WebSocket = require('ws');
+const {calcRSI} = require('./indicators')
+const {coinPairs} = require('./wallet')
 
 // const { Telegraf } = require('telegraf');
 // const bot = new Telegraf(`${process.env.BOT_TOKEN}`);
@@ -11,52 +13,8 @@ const klineInterval = '1m'
 
 const baseUrlWS = 'wss://stream.binance.com:9443/ws/'
 
-// Relative Strength Index (RSI)
-//. RSI = 100 - 100 / (1 + U / D)
-function calcRSI(prices) {
-    let ganhos = 0;
-    let perdas = 0;
-    for (let i = prices.length - 14; i < prices.length; i++) {
-        const diferenca = prices[i] - prices[i - 1];
-        if (diferenca >= 0)
-            ganhos += diferenca;
-        else
-            perdas -= diferenca;
-    }
-
-    const forcaRelativa = ganhos / perdas;
-    return 100 - (100 / (1 + forcaRelativa));
-}
-
 const currency = "BUSD";
-const coinPairs = [
-    {
-        buyDate: "2021-11-26 07:18:45", 
-        symbol:"BNBBTC", 
-        baseAsset:"BNB", 
-        quoteAsset:"BTC", 
-        amountBase: 2, //BNB
-        amountQuote: 0.0210588, //.BTC received 
-        rate: 0.0105294, //1 BNB => 0.0105294 BTC
-        rateUSD: 584.58, //1 BNB => 584.58
-        amountUSD: 1169.16, // .USD => amountBase (2) * rateUSD (584.58)
-        targetProfit: 0.05, // 5%
-        stopLoss: 0.15, //15%
-    },
-    {
-        buyDate: "2021-11-24 22:25:45", 
-        symbol:"MANAUSDT", 
-        baseAsset:"USDT", 
-        quoteAsset:"MANA", 
-        amountBase: 48, //USDT
-        amountQuote: 10.01454195, //.MANA received 
-        rate: 0.20863629, //1 USDT => 0.20863629 MANA
-        rateUSD: 584.58, //1 BNB => 584.58
-        amountUSD: 1169.16, //. USD => amountBase (2) * rateUSD (584.58)
-        targetProfit: 0.05, // 5%
-        stopLoss: 0.15, //15%
-    }
-];
+
 
 async function symbolMonitor(coinPair) {
     const urlRest = `${baseUrlRest}${(coinPair.symbol).toUpperCase()}&interval=${klineInterval}`;

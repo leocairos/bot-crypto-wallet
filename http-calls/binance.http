@@ -17,3 +17,12 @@ GET {{baseUrl}}/trades?symbol=BTCBUSD&limit=100
 ###
 GET https://api.binance.com/sapi/v1/managed-subaccount/asset
 X-MBX-APIKEY: {{apiKey}}
+
+
+### Historical trades data
+GET {{baseUrl}}/historicalTrades?symbol=BTCBUSD&limit=100
+X-MBX-APIKEY: {{apiKey}}
+
+### Historical trades data from id 0
+GET {{baseUrl}}/historicalTrades?symbol=LAZIOUSDT&fromId=0&limit=100
+X-MBX-APIKEY: {{apiKey}}
